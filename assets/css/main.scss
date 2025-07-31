@@ -1,0 +1,9 @@
+---
+---
+$serif      : "ZCOOL XiaoWei", serif;
+$sans-serif : "ZCOOL XiaoWei", sans-serif;
+
+$global-font-family : $sans-serif;   // body text
+$header-font-family : $sans-serif;   // headings/nav
+
+@import "minimal-mistakes";
