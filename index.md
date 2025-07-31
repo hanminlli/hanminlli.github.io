@@ -16,3 +16,14 @@ you like. Example:
 > I am a PhD candidate at KAUST working on optimization, federated
 > learning and structural variant analysis. My research focuses on …
 
+## Recent News
+{% assign items = site.news | sort: "date" | reverse %}
+<ul class="news-list">
+{% for n in items limit:3 %}
+  <li>
+    <strong><a href="{{ n.url | relative_url }}">{{ n.title }}</a></strong>
+    <small>— {{ n.date | date: "%b %d, %Y" }}</small><br/>
+    {{ n.summary | markdownify }}
+  </li>
+{% endfor %}
+</ul>

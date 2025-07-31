@@ -113,3 +113,10 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+
+# ─── custom collections ────────────────────────────
+collections:
+  news:
+    output:   true                # creates standalone pages
+    permalink: /news/:path/       # e.g. /news/site-launch/
