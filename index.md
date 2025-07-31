@@ -27,3 +27,18 @@ you like. Example:
   </li>
 {% endfor %}
 </ul>
+
+---
+
+## Papers
+{% assign pubs = site.papers | sort: "year" | reverse %}
+{% if pubs %}
+<ul class="paper-list">
+{% for p in pubs %}
+  <li>{{ p.citation | markdownify }}</li>
+{% endfor %}
+</ul>
+[→ full list](/papers/)
+{% else %}
+<p>No papers yet.</p>
+{% endif %}

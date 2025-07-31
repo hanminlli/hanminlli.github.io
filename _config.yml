@@ -120,3 +120,6 @@ collections:
   news:
     output:   true                # creates standalone pages
     permalink: /news/:path/       # e.g. /news/site-launch/
+  papers:
+    output:   true                # creates standalone pages
+    permalink: /papers/:path/       # e.g. /papers/site-launch/

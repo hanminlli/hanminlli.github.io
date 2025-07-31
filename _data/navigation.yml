@@ -9,3 +9,5 @@ main:
     url: /about/
   - title: "News"
     url: /news/
+  - title: "Papers"          # ← new link
+    url:   /papers/
