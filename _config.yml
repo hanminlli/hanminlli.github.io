@@ -16,12 +16,10 @@
 title: Hanmin Li
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-twitter_username: username
-github_username: username
-minimal_mistakes_skin: default
+  Computer Science Ph.D Candidate | King Abdullah University of Science and Technology
+# twitter_username: username
+github_username: hanminlli
+minimal_mistakes_skin: air
 search: true
 
 # Build settings
@@ -58,22 +56,33 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Hanmin Li"
+  name   : "Hanmin Li (李 瀚民)"
   avatar : "/assets/images/avatar.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "I am a PhD candidate in Computer Science at KAUST, focusing on efficient training of large language models (LLMs), distributed training and optimization, theoretical foundations of learning from decentralized data."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://hanminlli.github.io"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/hanminlli"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://instagram.com/"
+    - label: "CV"
+      icon: "fas fa-fw fa-file-alt"
+      url: "/assets/files/cv.pdf"
+
+    - label: "LinkedIn"
+      icon:  "fab fa-fw fa-linkedin"     # Font Awesome brand icon
+      url:   "https://www.linkedin.com/in/your-username"
+
+    - label: "Google Scholar"
+      icon:  "ai ai-google-scholar ai-fw" # Academicons icon
+      url:   "https://scholar.google.com/citations?user=XXXX"
 
 footer:
   links:
