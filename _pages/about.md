@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "Facts About Me"
+classes: wide  
 ---
 
 I was born and raised in Hefei, Anhui, a city with over 2,000 years of history that became a prefectural seat during the Tang dynasty (7th century CE). I spent the first 21 years of my life in Hefei, my primary, secondary schools and my high school, as well as my alma mater, are all located there. 
@@ -14,7 +15,7 @@ After I arrived at KAUST, I adopted a calico cat I found on the doorstep of a lo
 </figure>
 A UK research team estimated that pet ownership delivers about £70,000 per year in life-satisfaction value (roughly $90,000), so Guoba continues to enrich my life immeasurably.
 
-Nothing beats the feeling of being outdoors, hiking, in particular, makes me feel fully present. I am also a big fan of travelling and I have visited lots of countries. Here is my current foot print.
+Nothing beats the feeling of being outdoors, hiking, in particular, makes me feel fully present. I am also a big fan of travelling and I have visited lots of countries and regions. Here is my current foot print.
 
 
 <div style="max-width:720px;margin:auto;">

@@ -1,56 +1,136 @@
-
-<div class="footprints-map">
-  {% include world_high_res.svg %}
-</div>
+<!-- _includes/visited-map.html -->
+<div class="footprints-map" id="footprints"></div>
 
 <style>
-  
-  .footprints-map          { width:100%; max-width:480px; margin:auto; cursor:pointer; }
-  .footprints-map svg      { width:100%; height:auto; }
-
-  
-  .footprints-map svg path { fill:#fff; stroke:#888; stroke-width:.4; }
-  .footprints-map svg path.visited { fill:#f94144; }
+  .footprints-map {
+    max-width: 960px;
+    margin: auto;
+    cursor: pointer;
+  }
+  .footprints-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    const codes = "{{ include.countries | default:'' }}"
-                .split(',')
-                .map(s => s.trim().toUpperCase())   // ← make IDs match the SVG
-                .filter(Boolean);
+(function(){
+  // 1. 你要高亮的 ISO-2 → Natural Earth 名称
+  const mapping = {
+    CN:"China", EG:"Egypt", FR:"France", GR:"Greece", IT:"Italy",
+    KE:"Kenya", QA:"Qatar", SA:"Saudi Arabia", ES:"Spain", SE:"Sweden",
+    AE:"United Arab Emirates", GB:"United Kingdom", CA:"Canada",
+    US:"United States of America", NO:"Norway", AT:"Austria",
+    DK:"Denmark", NL:"Netherlands", BE:"Belgium", MU:"Mauritius",
+    FO:"Faroe Islands", MC:"Monaco"
+  };
+  const visitedISO2 = "{{ include.countries }}"
+    .split(',').map(c=>c.trim().toUpperCase()).filter(Boolean);
+  const visitedNames = new Set( visitedISO2.map(c=>mapping[c]).filter(Boolean) );
 
-    let hit = 0;
-    codes.forEach(code => {
-      const el = document.getElementById(code);
-      if (el) { el.classList.add('visited'); hit++; }
-    });
-    console.log(`Visited colored: ${hit}/${codes.length}`);
+  // 2. 加载 TopoJSON
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+    .then(world => {
+      let features = topojson.feature(world, world.objects.countries).features;
 
-    
-    const container = document.querySelector('.footprints-map');
-    container.addEventListener('click', () => {
-      
-      const big = window.open('', '_blank');
-      big.document.write(
-`<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Visited Countries - Full View</title>
-  <style>
-    body{margin:0;display:flex;justify-content:center;align-items:center;background:#fff;}
-    svg {width:90vw;height:auto;}
-    svg path{fill:#fff;stroke:#888;stroke-width:.4;}
-    svg path.visited{fill:#ffc0cb;}
-  </style>
-</head>
-<body>
-  ${container.querySelector('svg').outerHTML}
-</body>
-</html>`);
-      big.document.close();
+      // 3. 排除单独的海外省（如果有独立条目）
+      const exclude = new Set([
+        "Guadeloupe","Martinique","Réunion",
+        "Mayotte","Saint Pierre and Miquelon"
+      ]);
+      features = features.filter(d => !exclude.has(d.properties.name));
+
+      // 4. 针对 France：剔除其 multipolygon 中低纬度那块（法属圭亚那）
+      features = features.map(d => {
+        if (d.properties.name === "France" && d.geometry.type === "MultiPolygon") {
+          const filteredPolys = d.geometry.coordinates.filter(polygon => {
+            // polygon[0] 是外环
+            const ring = polygon[0];
+            // 计算外环平均纬度
+            const avgLat = ring.reduce((sum, pt) => sum + pt[1], 0) / ring.length;
+            return avgLat > 10;  // 只保留纬度 >10° 的部分
+          });
+          return {
+            ...d,
+            geometry: {
+              ...d.geometry,
+              coordinates: filteredPolys
+            }
+          };
+        }
+        return d;
+      });
+
+      // 5. 准备两种投影
+      const baseW = 960, baseH = 520;
+      const projNat  = d3.geoNaturalEarth1().fitSize([baseW, baseH], {type:"Sphere"});
+      const projFlat = d3.geoEquirectangular().fitSize([baseW, baseH], {type:"Sphere"});
+      const pathNat  = d3.geoPath(projNat);
+      let   pathFlat = d3.geoPath(projFlat);
+
+      // 6. 绘制初始 Natural Earth 地图
+      const svg = d3.select("#footprints")
+        .append("svg")
+        .attr("viewBox", `0 0 ${baseW} ${baseH}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+      // 背景球
+      svg.append("path")
+         .datum({type:"Sphere"})
+         .attr("d", pathNat)
+         .attr("fill","#f5f5f5");
+
+      // 国家轮廓 + 浅蓝高亮
+      svg.append("g")
+         .selectAll("path")
+         .data(features)
+         .join("path")
+           .attr("d", pathNat)
+           .attr("fill", d=> visitedNames.has(d.properties.name) ? "#add8e6" : "#ffffff")
+           .attr("stroke","#666")
+           .attr("stroke-width",.35);
+
+      // 7. 点击：离屏绘制平面投影 & 新标签打开
+      document.getElementById("footprints").addEventListener("click", ()=>{
+        const W = window.innerWidth - 40;
+        const H = window.innerHeight - 40;
+        projFlat.fitSize([W, H], {type:"Sphere"});
+        pathFlat = d3.geoPath(projFlat);
+
+        // 离屏 SVG
+        const xmlns = "http://www.w3.org/2000/svg";
+        const off = document.createElementNS(xmlns, "svg");
+        off.setAttribute("xmlns", xmlns);
+        off.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        off.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        off.setAttribute("width", W);
+        off.setAttribute("height", H);
+        const dsp = d3.select(off);
+
+        // 背景球
+        dsp.append("path")
+           .datum({type:"Sphere"})
+           .attr("d", pathFlat)
+           .attr("fill","#f5f5f5");
+
+        // 国家
+        dsp.append("g")
+           .selectAll("path")
+           .data(features)
+           .join("path")
+             .attr("d", pathFlat)
+             .attr("fill", d=> visitedNames.has(d.properties.name) ? "#add8e6" : "#ffffff")
+             .attr("stroke","#666")
+             .attr("stroke-width",.35);
+
+        // 序列化并打开
+        const str  = new XMLSerializer().serializeToString(off);
+        const blob = new Blob([str], {type:"image/svg+xml;charset=utf-8"});
+        window.open(URL.createObjectURL(blob), "_blank");
+      });
     });
-  });
+})();
 </script>
