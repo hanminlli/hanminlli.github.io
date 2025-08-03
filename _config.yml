@@ -85,6 +85,10 @@ author:
       icon:  "ai ai-google-scholar ai-fw"   # ← two hyphens
       url:   "https://scholar.google.com/citations?user=uc_I1KYAAAAJ&hl=en"
 
+    - label: "Email"
+      icon: "fas fa-envelope"
+      url: "mailto:hanmin.li@kaust.edu.sa"
+
 footer:
   links:
     # - label: "Twitter"

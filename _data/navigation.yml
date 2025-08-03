@@ -1,6 +1,8 @@
 main:
   - title: "Home"
     url: / 
+  - title: "Papers"          # ← new link
+    url: /papers/
   - title: "Posts"
     url: /posts/
   - title: "Categories"
@@ -11,5 +13,4 @@ main:
     url: /about/
   - title: "News"
     url: /news/
-  - title: "Papers"          # ← new link
-    url:   /papers/
+  

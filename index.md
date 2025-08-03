@@ -16,6 +16,18 @@ Hi there! I am **Hanmin Li**, a PhD candidate in Computer Science at [KAUST](htt
 More broadly, my interests also extends to the theory of modern machine learning, including first-order methods, convex and non-convex optimization, and operator theory, as well as applied areas like deep learning and language modeling.
 {: .text-justify}
 
+Before starting my Ph.D., I earned my master degress in **Computer Science** also at KAUST, after completing a **B.S. in Computer Science and Technology** at the [School of the Gifted Young](https://en.scgy.ustc.edu.cn/main.htm) in the [University of Science and Technology of China (USTC)](https://en.ustc.edu.cn/).
+{: .text-justify}
+
+Currently, I am working on: 
+- Distributed training of large language models (LLMs), including experience with [large-scale GPU clusters](https://docs.hpc.kaust.edu.sa/systems/shaheen3/index.html) and training using PyTorch Distributed Data Parallel (DDP).
+- Efficient optimizer design for large-scale training, with a focus on advancing the [Muon](https://kellerjordan.github.io/posts/muon/) optimizer to achieve faster convergence and improved scalability.
+- Designing efficient algorithms for large language models (LLMs), with a focus on both theoretical analysis and empirical validation.
+
+For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.edu.sa">hanmin.li@kaust.edu.sa</a>.
+
+> I am currently **open** to internship opportunities in related areas.
+
 
 ## Recent News
 {% assign items = site.news | sort: "date" | reverse %}
