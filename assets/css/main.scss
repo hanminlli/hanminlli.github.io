@@ -17,5 +17,14 @@ $strong-font-weight : 700;           // Bold
   hyphens: auto;
 }
 
+/* assets/css/main.scss */
+.paper-divider {            /* ★ new style for the divider ★ */
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1.25rem 0;
+}
+
 /* 3 ───────────  bring in the theme  ────────────────────────────────────── */
 @import "minimal-mistakes";
+
+

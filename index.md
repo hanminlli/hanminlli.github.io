@@ -44,14 +44,33 @@ For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.ed
 ---
 
 ## Papers
-{% assign pubs = site.papers | sort: "year" | reverse %}
+{% assign pubs = site.papers | sort:"year" | reverse %}
 {% if pubs %}
 <ul class="paper-list">
 {% for p in pubs %}
-  <li>{{ p.citation | markdownify }}</li>
+<li>
+  <strong>{{ p.title }}</strong><br>
+
+  {%- capture highlighted_authors -%}
+    {{ p.authors
+       | replace: "Hanmin Li",
+                  "<strong><u>Hanmin&nbsp;Li</u></strong>" }}
+  {%- endcapture -%}
+
+  <span class="authors">{{ highlighted_authors | raw }}</span>,
+  <em>{{ p.venue }}</em>.
+  • {% if p.arxiv %}<a href="{{ p.arxiv }}">[paper]</a>{% endif %}
+  {% if p.cite  %}{% if p.arxiv %} • {% endif %}
+  <a href="{{ p.cite }}">[citations]</a>{% endif %}<br>
+  <span class="summary">{{ p.summary | markdownify }}</span>
+</li>
+{% unless forloop.last %}
+<hr class="paper-divider">   <!-- ★ new divider between papers ★ -->
+{% endunless %}
 {% endfor %}
 </ul>
-[→ full list](/papers/)
+
+<p><a href="/papers/">→ full list</a></p>
 {% else %}
 <p>No papers yet.</p>
 {% endif %}
