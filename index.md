@@ -5,11 +5,15 @@ permalink: /            # make sure this is the root URL
 classes: "home"         # optional, lets you style the page later
 author_profile: true
 # author_profile: true  # uncomment to repeat the avatar + links at top
+classes: wide  
 ---
 
 ## Biography
 
-Hi there! I am **Hanmin Li**, a PhD candidate in Computer Science at [KAUST](https://www.kaust.edu.sa/en/) under the supervision of [Prof. Peter Richtárik](https://richtarik.org). My research focus lies at the intersection of optimization and large language models (LLMs), with a focus on training efficiency and scalability. I am also interested in distributed training and the theoretical foundations of learning from decentralized data. More broadly, my interests also extends to the theory of modern machine learning, including first-order methods, convex and non-convex optimization, and operator theory, as well as applied areas like deep learning and language modeling.
+Hi there! I am **Hanmin Li**, a PhD candidate in Computer Science at [KAUST](https://www.kaust.edu.sa/en/) under the supervision of [Prof. Peter Richtárik](https://richtarik.org). My research focus lies at the intersection of optimization and large language models (LLMs), with a focus on training efficiency and scalability. I am also interested in distributed training and the theoretical foundations of learning from decentralized data. 
+{: .text-justify}
+
+More broadly, my interests also extends to the theory of modern machine learning, including first-order methods, convex and non-convex optimization, and operator theory, as well as applied areas like deep learning and language modeling.
 {: .text-justify}
 
 
