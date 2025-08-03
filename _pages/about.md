@@ -18,5 +18,5 @@ Nothing beats the feeling of being outdoors, hiking, in particular, makes me fee
 
 
 <div style="max-width:720px;margin:auto;">
-  {% include visited-map.html countries="cn, eg, fr, gr, it, ke, qa, sa, es, se, ae, gb, " %}
+  {% include visited-map.html countries="cn, eg, fr, gr, it, ke, qa, sa, es, se, ae, gb, ca, us, no, at, dk, nl, be, mu, fo, mc" %}
 </div>

@@ -17,7 +17,9 @@
   document.addEventListener('DOMContentLoaded', () => {
     
     const codes = "{{ include.countries | default:'' }}"
-                    .split(',').map(s => s.trim()).filter(Boolean);
+                .split(',')
+                .map(s => s.trim().toUpperCase())   // ← make IDs match the SVG
+                .filter(Boolean);
 
     let hit = 0;
     codes.forEach(code => {
@@ -41,7 +43,7 @@
     body{margin:0;display:flex;justify-content:center;align-items:center;background:#fff;}
     svg {width:90vw;height:auto;}
     svg path{fill:#fff;stroke:#888;stroke-width:.4;}
-    svg path.visited{fill:#f94144;}
+    svg path.visited{fill:#ffc0cb;}
   </style>
 </head>
 <body>
