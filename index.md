@@ -77,6 +77,30 @@ For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.ed
 
 ---
 
+## Talks
+
+{% assign talks = site.talks | sort:"date" | reverse %}
+{% if talks %}
+<ul class="talk-list">
+  {% for t in talks %}
+  <li>
+    <strong>{{ t.title }}</strong><br>
+    <small>{{ t.date | date: "%b %d, %Y" }} — {{ t.venue }}, {{ t.place }}</small><br>
+    {% if t.slides %}
+      <a href="{{ t.slides | relative_url }}">Slides</a>
+    {% endif %}
+  </li>
+  {% unless forloop.last %}<hr class="talk-divider">{% endunless %}
+  {% endfor %}
+</ul>
+<p><a href="/talks/">→ full list</a></p>
+{% else %}
+<p>No talks yet.</p>
+{% endif %}
+
+
+---
+
 ## Reviewer Services
 - [NeurIPS](https://neurips.cc/) 24', 25'
 - [NeurIPS OPT-ML](https://opt-ml.org/) 24' 

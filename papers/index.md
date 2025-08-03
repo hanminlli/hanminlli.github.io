@@ -1,6 +1,6 @@
 ---
 title: Papers
-layout: page        # ← change from “collection” to “page”
+layout: single       # ← change from “collection” to “page”
 classes: wide       # optional: wider text block
 permalink: /papers/
 ---

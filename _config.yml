@@ -132,9 +132,11 @@ tag_archive:
 # ─── custom collections ────────────────────────────
 collections:
   news:
-    output:   true                # creates standalone pages
-    permalink: /news/:path/       # e.g. /news/site-launch/
+    output: true
+    permalink: /news/:path/
   papers:
-    output:   true                # creates standalone pages
-    permalink: /papers/:path/       # e.g. /papers/site-launch/
-
+    output: true
+    permalink: /papers/:path/
+  talks:
+    output: true
+    permalink: /talks/:path/
