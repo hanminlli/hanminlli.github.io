@@ -61,7 +61,7 @@ For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.ed
   <em>{{ p.venue }}</em>.
   • {% if p.arxiv %}<a href="{{ p.arxiv }}">[paper]</a>{% endif %}
   {% if p.cite  %}{% if p.arxiv %} • {% endif %}
-  <a href="{{ p.cite }}">[citations]</a>{% endif %}<br>
+  <a href="{{ p.cite }}">[BibTex]</a>{% endif %}<br>
   <span class="summary">{{ p.summary | markdownify }}</span>
 </li>
 {% unless forloop.last %}
@@ -74,3 +74,15 @@ For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.ed
 {% else %}
 <p>No papers yet.</p>
 {% endif %}
+
+---
+
+## Reviewer Services
+- [NeurIPS](https://neurips.cc/) 24', 25'
+- [NeurIPS OPT-ML](https://opt-ml.org/) 24' 
+- [ICLR](https://iclr.cc/) 25'
+- [ICML](https://icml.cc/) 25'
+- [JMLR](https://www.jmlr.org/)
+- [IEEE TNNLS](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=5962385)
+- [IEEE TSP](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=78)
+-  Optimization Methods and Software.
