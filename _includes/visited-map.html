@@ -1,0 +1,54 @@
+
+<div class="footprints-map">
+  {% include world_high_res.svg %}
+</div>
+
+<style>
+  
+  .footprints-map          { width:100%; max-width:480px; margin:auto; cursor:pointer; }
+  .footprints-map svg      { width:100%; height:auto; }
+
+  
+  .footprints-map svg path { fill:#fff; stroke:#888; stroke-width:.4; }
+  .footprints-map svg path.visited { fill:#f94144; }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    const codes = "{{ include.countries | default:'' }}"
+                    .split(',').map(s => s.trim()).filter(Boolean);
+
+    let hit = 0;
+    codes.forEach(code => {
+      const el = document.getElementById(code);
+      if (el) { el.classList.add('visited'); hit++; }
+    });
+    console.log(`Visited colored: ${hit}/${codes.length}`);
+
+    
+    const container = document.querySelector('.footprints-map');
+    container.addEventListener('click', () => {
+      
+      const big = window.open('', '_blank');
+      big.document.write(
+`<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Visited Countries - Full View</title>
+  <style>
+    body{margin:0;display:flex;justify-content:center;align-items:center;background:#fff;}
+    svg {width:90vw;height:auto;}
+    svg path{fill:#fff;stroke:#888;stroke-width:.4;}
+    svg path.visited{fill:#f94144;}
+  </style>
+</head>
+<body>
+  ${container.querySelector('svg').outerHTML}
+</body>
+</html>`);
+      big.document.close();
+    });
+  });
+</script>

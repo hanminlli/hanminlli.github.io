@@ -14,4 +14,9 @@ After I arrived at KAUST, I adopted a calico cat I found on the doorstep of a lo
 </figure>
 A UK research team estimated that pet ownership delivers about £70,000 per year in life-satisfaction value (roughly $90,000), so Guoba continues to enrich my life immeasurably.
 
-Nothing beats the feeling of being outdoors, hiking, in particular, makes me feel fully present. I am also a big fan of travelling and I have visited lots of countries.
+Nothing beats the feeling of being outdoors, hiking, in particular, makes me feel fully present. I am also a big fan of travelling and I have visited lots of countries. Here is my current foot print.
+
+
+<div style="max-width:720px;margin:auto;">
+  {% include visited-map.html countries="cn, eg, fr, gr, it, ke, qa, sa, es, se, ae, gb, " %}
+</div>
