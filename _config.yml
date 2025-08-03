@@ -55,6 +55,7 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
+
 author:
   name   : "Hanmin Li (李 瀚民)"
   avatar : "/assets/images/avatar.jpg"
@@ -62,7 +63,7 @@ author:
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://hanminlli.github.io"
+      url: "https://cemse.kaust.edu.sa/profiles/hanmin-li"
     # - label: "Twitter"
     #   icon: "fab fa-fw fa-twitter-square"
     #   url: "https://twitter.com/"
@@ -78,11 +79,11 @@ author:
 
     - label: "LinkedIn"
       icon:  "fab fa-fw fa-linkedin"     # Font Awesome brand icon
-      url:   "https://www.linkedin.com/in/your-username"
+      url:   "https://www.linkedin.com/in/hanmin-li-034b8b245/"
 
     - label: "Google Scholar"
-      icon:  "ai ai-google-scholar ai-fw" # Academicons icon
-      url:   "https://scholar.google.com/citations?user=XXXX"
+      icon:  "ai ai-google-scholar ai-fw"   # ← two hyphens
+      url:   "https://scholar.google.com/citations?user=uc_I1KYAAAAJ&hl=en"
 
 footer:
   links:
