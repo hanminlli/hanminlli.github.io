@@ -1,9 +1,21 @@
 ---
 ---
-$serif      : "ZCOOL XiaoWei", serif;
-$sans-serif : "ZCOOL XiaoWei", sans-serif;
+
+/* 1 ───────────  global type choices  ────────────────────────────────────── */
+$serif      : 'Source Sans 3', serif;        // for any place the theme calls $serif
+$sans-serif : 'Source Sans 3', sans-serif;   // sidebar/nav/footer use this
 
 $global-font-family : $sans-serif;   // body text
-$header-font-family : $sans-serif;   // headings/nav
+$header-font-family : $sans-serif;   // h1–h6, nav labels
+$base-font-weight   : 500;           // Medium
+$strong-font-weight : 700;           // Bold
 
+/* 2 ───────────  paragraph tweaks (optional)  ───────────────────────────── */
+.author__bio p {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+}
+
+/* 3 ───────────  bring in the theme  ────────────────────────────────────── */
 @import "minimal-mistakes";
