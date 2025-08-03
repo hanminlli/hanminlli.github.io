@@ -9,12 +9,9 @@ author_profile: true
 
 ## Biography
 
-Write a couple of paragraphs about yourself here.  
-You can use **Markdown** formatting, add images, lists, links—whatever
-you like. Example:
+Hi there! I am **Hanmin Li**, a PhD candidate in Computer Science at [KAUST](https://www.kaust.edu.sa/en/) under the supervision of [Prof. Peter Richtárik](https://richtarik.org). My research focus lies at the intersection of optimization and large language models (LLMs), with a focus on training efficiency and scalability. I am also interested in distributed training and the theoretical foundations of learning from decentralized data. More broadly, my interests also extends to the theory of modern machine learning, including first-order methods, convex and non-convex optimization, and operator theory, as well as applied areas like deep learning and language modeling.
+{: .text-justify}
 
-> I am a PhD candidate at KAUST working on optimization, federated
-> learning and structural variant analysis. My research focuses on …
 
 ## Recent News
 {% assign items = site.news | sort: "date" | reverse %}
