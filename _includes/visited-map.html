@@ -18,7 +18,6 @@
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script>
 (function(){
-  // 1. 你要高亮的 ISO-2 → Natural Earth 名称
   const mapping = {
     CN:"China", EG:"Egypt", FR:"France", GR:"Greece", IT:"Italy",
     KE:"Kenya", QA:"Qatar", SA:"Saudi Arabia", ES:"Spain", SE:"Sweden",
@@ -31,27 +30,22 @@
     .split(',').map(c=>c.trim().toUpperCase()).filter(Boolean);
   const visitedNames = new Set( visitedISO2.map(c=>mapping[c]).filter(Boolean) );
 
-  // 2. 加载 TopoJSON
-  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
     .then(world => {
       let features = topojson.feature(world, world.objects.countries).features;
 
-      // 3. 排除单独的海外省（如果有独立条目）
       const exclude = new Set([
         "Guadeloupe","Martinique","Réunion",
         "Mayotte","Saint Pierre and Miquelon"
       ]);
       features = features.filter(d => !exclude.has(d.properties.name));
 
-      // 4. 针对 France：剔除其 multipolygon 中低纬度那块（法属圭亚那）
       features = features.map(d => {
         if (d.properties.name === "France" && d.geometry.type === "MultiPolygon") {
           const filteredPolys = d.geometry.coordinates.filter(polygon => {
-            // polygon[0] 是外环
             const ring = polygon[0];
-            // 计算外环平均纬度
             const avgLat = ring.reduce((sum, pt) => sum + pt[1], 0) / ring.length;
-            return avgLat > 10;  // 只保留纬度 >10° 的部分
+            return avgLat > 10;  
           });
           return {
             ...d,
@@ -64,26 +58,23 @@
         return d;
       });
 
-      // 5. 准备两种投影
-      const baseW = 960, baseH = 520;
+      const baseW = 2200, baseH = 1200;
       const projNat  = d3.geoNaturalEarth1().fitSize([baseW, baseH], {type:"Sphere"});
       const projFlat = d3.geoEquirectangular().fitSize([baseW, baseH], {type:"Sphere"});
       const pathNat  = d3.geoPath(projNat);
       let   pathFlat = d3.geoPath(projFlat);
 
-      // 6. 绘制初始 Natural Earth 地图
+
       const svg = d3.select("#footprints")
         .append("svg")
         .attr("viewBox", `0 0 ${baseW} ${baseH}`)
         .attr("preserveAspectRatio", "xMidYMid meet");
 
-      // 背景球
       svg.append("path")
          .datum({type:"Sphere"})
          .attr("d", pathNat)
          .attr("fill","#f5f5f5");
 
-      // 国家轮廓 + 浅蓝高亮
       svg.append("g")
          .selectAll("path")
          .data(features)
@@ -93,14 +84,13 @@
            .attr("stroke","#666")
            .attr("stroke-width",.35);
 
-      // 7. 点击：离屏绘制平面投影 & 新标签打开
       document.getElementById("footprints").addEventListener("click", ()=>{
         const W = window.innerWidth - 40;
         const H = window.innerHeight - 40;
         projFlat.fitSize([W, H], {type:"Sphere"});
         pathFlat = d3.geoPath(projFlat);
 
-        // 离屏 SVG
+
         const xmlns = "http://www.w3.org/2000/svg";
         const off = document.createElementNS(xmlns, "svg");
         off.setAttribute("xmlns", xmlns);
@@ -110,13 +100,11 @@
         off.setAttribute("height", H);
         const dsp = d3.select(off);
 
-        // 背景球
         dsp.append("path")
            .datum({type:"Sphere"})
            .attr("d", pathFlat)
            .attr("fill","#f5f5f5");
 
-        // 国家
         dsp.append("g")
            .selectAll("path")
            .data(features)
@@ -126,7 +114,6 @@
              .attr("stroke","#666")
              .attr("stroke-width",.35);
 
-        // 序列化并打开
         const str  = new XMLSerializer().serializeToString(off);
         const blob = new Blob([str], {type:"image/svg+xml;charset=utf-8"});
         window.open(URL.createObjectURL(blob), "_blank");
