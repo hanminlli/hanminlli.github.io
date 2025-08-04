@@ -21,7 +21,7 @@ Before starting my Ph.D., I earned my master degress in **Computer Science** als
 
 Currently, I am working on: 
 - Distributed training of large language models (LLMs), including experience with [large-scale GPU clusters](https://docs.hpc.kaust.edu.sa/systems/shaheen3/index.html) and training using PyTorch Distributed Data Parallel (DDP).
-- Efficient optimizer design for large-scale training, with a focus on advancing the [Muon](https://kellerjordan.github.io/posts/muon/) optimizer to achieve faster convergence and improved scalability.
+- Efficient optimizer design for large-scale training, with a focus on advancing the [Muon](https://kellerjordan.github.io/posts/muon/) optimizer and its variants to achieve faster convergence and improved scalability.
 - Designing efficient algorithms for large language models (LLMs), with a focus on both theoretical analysis and empirical validation.
 
 For any inquiries, feel free to contact me at <a href="mailto:hanmin.li@kaust.edu.sa">hanmin.li@kaust.edu.sa</a>.
